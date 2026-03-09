@@ -1,33 +1,47 @@
 #include <stdio.h>
-#include <stdlib.h> 
-/* Libreria che permette la gestione della memoria tramite le seguenti funzioni:
-malloc() -> Alloca size byte e restituisce un puntatore alla memoria allocata
-calloc() -> Alloca in memoria per n elementi inizializando tutto a 0
-realloc() -> Ridimensiona un blocco già creato, può spostarlo in un altra locazione
-free() -> Libera la memoria allocata, fare solo se non serve più il puntatore
-
-Peremette la conversione di strighe tramite:
-atoi() -> Converte la stringa in intero, Non gestisce gli errori
-atof() -> Converte una stringa in double
-strtol() -> Converte la stringa in long, Gestisce gli errori
-strtod() -> Converte la stringa in double, Gestisce gli errori
-
-Permette il controllo del programma tramite:
-exit() -> Termina il programma es. [exit(0)] se 0 = successo se altro = errore
-abort() -> Termina il programma immediatamente, Usata per errori gravi
-atexit() -> Registra una funzioe da chiamare alla fine del programma
-
-Utilità varie sono invece: 
-rand() -> estrae un numero pseudo-casuale
-srand() -> imposta il seme del generatore casuale
-qsort() -> qsort(void *base, size_t n, size_t size, int (*cmp)(const void*, const void*)) Oridina un array generico (cioè di qualsiasi tipo)
-bserch() -> bsearch(const void *key, const void *base, size_t n, size_t size, int (*cmp)(const void*, const void*)) Ricerca binaria di un array ordinato 
-*/
+#include <stdlib.h> // Libreria per la gestione della memoria dinamica
+#include <string.h> // Libreria per la gestione delle stringhe
 
 int main(){
-    double *a = NULL; // Puntatore nullo, come fosse -1
+    /*
+        Puntatori in C:
 
-    a = malloc(sizeof(double)); // Creazione di un puntatore alla locazione di memoria con size double
-    a[0] = 3.14; // Si può vedere come un vettore di un elemento
-    printf("%f\n", a[0]);
+        I puntatori in C, ci aiutao a gestire la memoria in modo efficace.
+        Infatti la un putatore è una variabile, che contiene l'indirizzo
+        di memoria di un'altra variabile.
+
+        ma come possiamo prendere l'indirizzo di una variabile ?
+
+        tramite l'operatore &, che sta per address of, per esempio:
+    */
+    int Numero = 10;
+    
+    printf("Numero: %d\n", Numero);
+    printf("L'indirizzio di Numero e': %p\n", &Numero); // %p è il formato per stampare un indirizzo di memoria"
+
+    /* Ora vediamo come possiamo inzializare un puntatore */
+    double *puntatoreDouble = NULL; // Puntatore Nullo 
+    int *puntatore = &Numero; // il puntatore punta all'indirizzo di Numero
+    printf("%p\n", puntatore); // Stampa indizio di memoria del puntatore
+    printf("%d\n", *puntatore); // Stampa Numero 
+
+    /* 
+        Come possiamo allocare un puntatore dinamicamente? 
+        tramite la funzione malloc() e realloc(), vedremo come 
+        come questo è possibile, vediamolo subito:
+    */
+
+    int *p_Numero = malloc(sizeof(int)); // Allocazione dinamica di un intero
+    /*Possiamo vedere questi puntatori come array, quindi*/
+
+    p_Numero[0] = 10; // Assegnazione del valore 10 al primo elemento dell'array puntato da p_Numero
+    printf("%d\n", p_Numero[0]); // Stampa il valore del primo
+
+    p_Numero = realloc(p_Numero, 2*sizeof(int)); // Riassegnazione di memoria per un array di 2 interi
+    p_Numero[1] = 20; // Assegnazione del valore 
+    printf("%d\n", p_Numero[1]); // Stampa il valore del secondo elemento dell'array puntato da p_Numero
+
+    /*Possiamo "liberare" una memoria che è stata allocata con free()*/
+    free(p_Numero); // Libera la memoria allocata per p_Numero
+
 }
