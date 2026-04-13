@@ -40,7 +40,14 @@ char *StrCat(char *s0,char *s1){
 
 
     strcpy(cat,s0); 
-    strcpy(cat+lens0, s1); // // cat+len_s0 è l'indirizzo dell'elemento len_s0-esimo di cat
+    strcpy(cat+lens0, s1); //cat+len_s0 è l'indirizzo dell'elemento len_s0-esimo di cat
     return cat; 
 }
 
+int a = 5; 
+int b = 10;
+int *p = &a; // p è un puntatore a intero che punta alla variabile a
+int *q = p; // q è un puntatore a intero che punta alla stessa variabile a
+*q = *q + b; // Modifica il valore di a tramite il puntatore q, che punta a a. Ora a è uguale a 15
+p = &b; // p ora punta a b
+*p = *p - a; // Modifica il valore di b tramite il puntatore p, che ora punta a b. Ora b è uguale a -5
