@@ -10,20 +10,31 @@ int main(){
         Infatti la un putatore è una variabile, che contiene l'indirizzo
         di memoria di un'altra variabile.
 
+
         ma come possiamo prendere l'indirizzo di una variabile ?
 
         tramite l'operatore &, che sta per address of, per esempio:
+        (& non può essere usato su costanti,espressioni o variabili di classe register )
     */
     int Numero = 10;
     
     printf("Numero: %d\n", Numero);
     printf("L'indirizzio di Numero e': %p\n", &Numero); // %p è il formato per stampare un indirizzo di memoria"
 
-    /* Ora vediamo come possiamo inzializare un puntatore */
-    double *puntatoreDouble = NULL; // Puntatore Nullo 
-    int *puntatore = &Numero; // il puntatore punta all'indirizzo di Numero
-    printf("%p\n", puntatore); // Stampa indizio di memoria del puntatore
-    printf("%d\n", *puntatore); // Stampa Numero 
+    /*
+    Operatori
+        [&]: Address of - restituisce l'indirizzo di una variabile
+        [*]: Dereference - restituisce il valore alla quale un puntatore punta
+    ! Gli operatori & e *hanno diritto di precedenza sugli operatori aritmetici
+    */
+ 
+    /*Esempio di utilizzo dei puntatori*/
+    int x = 1, y = 2;
+    int z[10];
+    int *pi; // Dichiarazione puntatore a intero (specificato da int)
+    pi = &x; // pi punta ad x
+    y = *pi; // y prende il valore di x (y = 1) puntato da pi
+    pi = z[0]; // pi ora punta al primo elemento di z
 
     /* 
         Come possiamo allocare un puntatore dinamicamente? 
@@ -43,5 +54,20 @@ int main(){
 
     /*Possiamo "liberare" una memoria che è stata allocata con free()*/
     free(p_Numero); // Libera la memoria allocata per p_Numero
+
+    /* Puntatori e funzioni */
+    void swap(int *x,int *y ); //(Prototipo) Passaggio degli indirizzi di a e b alla funzione swap
+
+    void swap(int *x, int*y){
+        int temp = *x;
+        *x = *y; 
+        *y = temp; 
+    }
+
+    int x = 5, Y = 2;  
+    if(x > y ){
+        swap(&x,&y); // Se x è maggiore di y, scambiamo i loro valori
+    }
+
 
 }

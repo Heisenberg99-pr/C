@@ -12,9 +12,11 @@ int main(){
     int giorno,mese,anno; 
     printf("Inserisci data di nascita [g-m-a]... ");
     int conversioni = scanf("%d-%d-%d", &giorno, &mese, &anno); // Inserimento di 3 input differenti  
-    /* In conversioni viene inserito il numero delle variabili lette
+    /* 
+    In conversioni viene inserito il numero delle variabili lette
     In questo caso se = 3 allora la funzione scanf è andata a buon fine
-    altrimenti no*/
+    altrimenti no
+    */
     if(conversioni == 3){ 
         printf("Giorno: %d\n",giorno);                   
         printf("Mese: %d\n",mese); 
