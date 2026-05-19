@@ -8,7 +8,7 @@ char *intersezione(char str1[], char str2[]){
     int k = 0; 
     int len_str1 = strlen(str1); 
     int len_str2 = strlen(str2);
-    int min_len = (len_str1 < len_str2) ? len_str1 : len_str2; // Calcola il minimo tra le lunghezze 
+    int min_len = (len_str1 < len_str2) ? len_str1 : len_str2; // Condizione on-line -> Calcola il minimo tra le lunghezze 
     char *result = malloc(min_len*sizeof(char)); 
     for(int i = 0; i<len_str1;i++){
         for(int j = 0; j < len_str2; j++){
