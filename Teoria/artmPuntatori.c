@@ -6,7 +6,7 @@ char *StrCat(char *,char*);
 
 int main(){
     char str0[] = "programmazione"; 
-    char str1[] = "dei calcolatori";
+    char str1[] = "dei calcolatori"; 
     char *str2; 
 
     str2 = StrCat(str0,str1);
