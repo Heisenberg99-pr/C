@@ -14,7 +14,7 @@ typedef struct punto punto;
 
 int main(){
     struct punto p0 = {2.1,0.5}; 
-    punto p1 = {0,1}; // Creazione dei due punti
+    punto p1 = {0,1}; // Creazione dei due punti, le righe sono formalmente uguali ma la differenza sta nell'uso dell'alias
     p0.y = p0.x + p0.y; // Aggiorna p0.y con la somma di p0.x+p0.y
 
     // In seguito segue la stampa a video 

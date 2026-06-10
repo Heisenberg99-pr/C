@@ -59,7 +59,7 @@ void mostra_lista(lista lst){
 }
 
 /*La funzione main crea un piccola lista contenente due double e un int, 
-memorizati in tre variablìili. Alla funzione append dobbiamo passare l'inidrizzo di memoria in cui sono memorizzati questi valori, 
+memorizati in tre variablili. Alla funzione append dobbiamo passare l'inidrizzo di memoria in cui sono memorizzati questi valori, 
 cioè l'indirizzo a cui fanno riferimento le variabili stesse. Per ottenere l'idirizzo di una variabile 
 si utilizza l'operatore &: se x è una variabile, allora &x è
 l'indirizzo di memoria in cui x è memorizzata*/

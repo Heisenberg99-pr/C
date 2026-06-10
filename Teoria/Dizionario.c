@@ -63,7 +63,7 @@ con m liste di trabocco*/
 dizionario init_dizionario(int m){
     dizionario d; 
     d.m = m; 
-    d.a = malloc(sizeof(lista)*m); 
+    d.a = malloc(sizeof(lista)* m); 
     for (int i = 0; i < m; i++){
         d.a[i] = NULL; 
     }
@@ -201,4 +201,4 @@ int main(){
     d = cancella_dizionario(d, "due");
     d = cancella_dizionario(d, "nove");
     mostra_dizionario(d);
-}
+} 

@@ -7,8 +7,8 @@ di accedere a tutti gli altri nodi seguendo i riferimenti.
 
 L'ultimo nodo ha un riferimento nullo, indica il fine lista
 
-Questo tipo di struttura permette l'aggiunta,crecare
-e rimuovere elemnti scorrendo i nodi uno dopo l'altro, senza
+Questo tipo di struttura permette l'aggiunta,cercare
+e rimuovere elementi, scorrendo i nodi uno dopo l'altro, senza
 richiedere che la memoria sia contigua*/
 
 #include <stdio.h>
@@ -27,6 +27,7 @@ nodo *inserisci_inTesta(nodo*,double);
 nodo *cancella(nodo*,double);  
 
 int main(){
+    
     nodo *L = NULL; // lista concatenata vuota; oppure lista L = NULL
 
     for(int i=0; i < 10; i++){
@@ -50,23 +51,24 @@ void mostra_lista(nodo *L){
     
     printf("["); 
     while(p != NULL ){
-        printf("%f", p->info); 
+        printf("%f ,", p->info); 
         p = p -> next; 
     }
-
     printf("]\n"); 
 }
 /*Inserimento di un nuovo nodo con informazioni v in testa alla lista*/
 
 nodo *inserisci_inTesta(nodo *L,double v){
 
-    nodo *p = malloc (sizeof(nodo)); 
+    nodo *p = malloc(sizeof(nodo)); 
+    
     if(p==NULL){
         return L; //Malloc non è andata a buon fine
     }
-    p->info = v; 
-    p->next = L; 
-    return p; 
+    
+    p->info = v; // nell'oggetto p e nella posizione info, inserisci il valore
+    p->next = L; // collega p all'attuale inizio della lista
+    return p; // ritorna la lista
 }
 
 /*Cancella dalla lista il primo nodo contenente l'informazione v
@@ -106,7 +108,7 @@ nodo *cancella(nodo *L,double v){
     p = L; 
     // ricerca del nodo precedente a quello contenente v, perché in una lista singola non si può tornare indietro
 
-    while( p->next != NULL && p -> next->info != v){
+    while( p->next != NULL && p ->next->info != v){
        p = p->next;  
     }
 
