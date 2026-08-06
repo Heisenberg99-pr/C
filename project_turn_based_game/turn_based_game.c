@@ -3,6 +3,8 @@
 #include<string.h>
 #include<time.h>
 #include<stdbool.h>
+#include "game_inventory.h"
+
 
 
 struct mostro{
