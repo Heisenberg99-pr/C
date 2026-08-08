@@ -63,18 +63,33 @@ int main(){
     bool fuggito = false; 
     srand(time(NULL)); 
 
+
+    #pragma region def_mostri
     mostro mostro1 = {"Ignis", 150, 45, 30, 40};
     mostro mostro2 = {"Gorgone", 110, 35, 55, 30};
     mostro mostro3 = {"Demone", 80, 60, 20, 65};
     mostro mostro4 = {"Golem", 200, 25, 70, 15};
     mostro mostro5 = {"Idra", 95, 50, 25, 45};
+    #pragma endregion
 
+
+    #pragma region def_eroi
     personaggio eroe1 = {"Guerriero", false, 180, 40, 50, 25};
     personaggio eroe2 = {"Mago", false, 90, 70, 15, 35};
     personaggio eroe3 = {"Ladro", false, 110, 55, 25, 75};
     personaggio eroe4 = {"Chierico", false, 140, 35, 40, 30};
     personaggio eroe5 = {"Paladino", false, 160, 45, 60, 20};
+    #pragma endregion
     
+
+    #pragma region def_armi
+    Oggetto_arma arma_eroe1 = {"Spadone a Due Mani", 75};
+    Oggetto_arma arma_eroe5 = {"Martello da Guerra", 70};
+    Oggetto_arma arma_eroe3 = {"Pugnali Gemelli", 55};
+    Oggetto_arma arma_eroe4 = {"Mazza Chiodata", 45};
+    Oggetto_arma arma_eroe2 = {"Bastone di Legno", 25};
+    #pragma endregion
+        
     personaggio giocatore; 
     int Selezione_eroe;
     bool selezionato = false; 

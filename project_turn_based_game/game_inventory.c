@@ -5,11 +5,11 @@
 
 inventario inventario_crea(){ //Stesura della funzione, corpo
     inventario inv = {NULL,10,10};
-    inv.oggetto = (Oggetto *)malloc(sizeof(Oggetto)*inv.dim); 
+    inv.oggetto = (Oggetto_arma *)malloc(sizeof(Oggetto_arma)*inv.dim); 
     return inv; 
 }
 
-inventario raccogli_oggetto(inventario inv,char *str){
+inventario raccogli_oggetto(inventario inv,Oggetto_arma arma){
     for(int i = 0; i < inv.dim; i++){
         if(inv.oggetto[i].nome == NULL){
             inv.pos = i; 
@@ -17,7 +17,7 @@ inventario raccogli_oggetto(inventario inv,char *str){
         }
     }
 
-    inv.oggetto[inv.pos].nome = str; 
+    inv.oggetto[inv.pos] = arma; 
     return inv; 
 }
 
