@@ -3,9 +3,8 @@
 #include<string.h>
 #include<time.h>
 #include<stdbool.h>
+#include<unistd.h>
 #include "game_inventory.h"
-
-
 
 struct mostro{
     char *nome;
@@ -26,8 +25,11 @@ typedef struct mostro mostro;
 int attacco(int danno,int difesa); 
 int parata(int difesa);
 bool fuga(int vel_eroe,int vel_mostro,int ind_vel);
+void pausa(int millisecondi); 
 
-
+void pausa(int millisecondi){
+    usleep(millisecondi*1000);
+}
 
 int attacco(int danno, int difesa){
     int result = danno - ((danno*difesa)/100); 
@@ -174,7 +176,9 @@ int main(){
                 break;
             case 4: 
                 fuggito = fuga(giocatore.velocita,nemico.velocita,ind_vel);
+                pausa(1000);
                 if(fuggito == false){
+                    printf("Tentativo di fuga fallito...\n")
                     if(ind_vel >= 5){
                         break;
                     }
@@ -188,13 +192,14 @@ int main(){
             break; 
         }
 
-        printf("E' il turno del nemico...");
+        printf("E' il turno del nemico...\n");
 
         scelta = 1;  
 
         switch(scelta) {
             case 1: 
                 printf("Il nemico sta attaccando...\n");
+                pausa(2000);
                 giocatore.vita = giocatore.vita - attacco(nemico.attacco, giocatore.difesa); 
                 printf("Ti rimangono %d hp\n", giocatore.vita);
                 break; 
