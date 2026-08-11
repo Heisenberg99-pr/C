@@ -25,7 +25,7 @@ int main(){
     Operatori
         [&]: Address of - restituisce l'indirizzo di una variabile
         [*]: Dereference - restituisce il valore alla quale un puntatore punta
-    ! Gli operatori & e *hanno diritto di precedenza sugli operatori aritmetici
+    ! Gli operatori & e * hanno diritto di precedenza sugli operatori aritmetici
     */
  
     /*Esempio di utilizzo dei puntatori*/
