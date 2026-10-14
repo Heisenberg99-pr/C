@@ -3,7 +3,6 @@
 #include<string.h>
 #include<time.h>
 #include<stdbool.h>
-#include<unistd.h>
 #include "game_inventory.h"
 
 struct mostro{
@@ -28,7 +27,13 @@ bool fuga(int vel_eroe,int vel_mostro,int ind_vel);
 void pausa(int millisecondi); 
 
 void pausa(int millisecondi){
-    usleep(millisecondi*1000);
+    struct timespec ts; 
+
+    ts.tv_sec = millisecondi / 1000; //restituisce i secondi
+    ts.tv_nsec = (long)(millisecondi % 1000)* 1000000L; 
+
+    nanosleep(&ts,NULL); 
+    
 }
 
 int attacco(int danno, int difesa){
@@ -65,6 +70,21 @@ int main(){
     bool fuggito = false; 
     srand(time(NULL)); 
 
+    #pragma region def_armi
+    Oggetto_arma arma_eroe1 = {"Spadone a Due Mani", 75};
+    Oggetto_arma arma_eroe2 = {"Bastone di Legno", 25};
+    Oggetto_arma arma_eroe3 = {"Pugnali Gemelli", 55};
+    Oggetto_arma arma_eroe4 = {"Mazza Chiodata", 45};
+    Oggetto_arma arma_eroe5 = {"Martello da Guerra", 70};
+    #pragma endregion
+
+    #pragma region def_armature
+    Oggetto_armatura armatura_eroe1 = {"Armatura di Piastre", 25}; 
+    Oggetto_armatura armatura_eroe2 = {"Tunica Mistica", 5};        
+    Oggetto_armatura armatura_eroe3 = {"Giubba di Cuoio", 12};      
+    Oggetto_armatura armatura_eroe4 = {"Cotta di Maglia", 18};     
+    Oggetto_armatura armatura_eroe5 = {"Armatura Sacra", 30};     
+    #pragma endregion
 
     #pragma region def_mostri
     mostro mostro1 = {"Ignis", 150, 45, 30, 40};
@@ -76,23 +96,14 @@ int main(){
 
 
     #pragma region def_eroi
-    personaggio eroe1 = {"Guerriero", false, 180, 40, 50, 25};
-    personaggio eroe2 = {"Mago", false, 90, 70, 15, 35};
-    personaggio eroe3 = {"Ladro", false, 110, 55, 25, 75};
-    personaggio eroe4 = {"Chierico", false, 140, 35, 40, 30};
-    personaggio eroe5 = {"Paladino", false, 160, 45, 60, 20};
-    #pragma endregion
-    
-
-    #pragma region def_armi
-    Oggetto_arma arma_eroe1 = {"Spadone a Due Mani", 75};
-    Oggetto_arma arma_eroe5 = {"Martello da Guerra", 70};
-    Oggetto_arma arma_eroe3 = {"Pugnali Gemelli", 55};
-    Oggetto_arma arma_eroe4 = {"Mazza Chiodata", 45};
-    Oggetto_arma arma_eroe2 = {"Bastone di Legno", 25};
+    personaggio eroe1 = {"Guerriero", false, 180, arma_eroe1.dmg, armatura_eroe1.prot, 25};
+    personaggio eroe2 = {"Mago", false, 90, arma_eroe2.dmg, armatura_eroe2.prot, 35};
+    personaggio eroe3 = {"Ladro", false, 110, arma_eroe3.dmg, armatura_eroe3.prot, 75};
+    personaggio eroe4 = {"Chierico", false, 140, arma_eroe4.dmg, armatura_eroe4.prot, 30};
+    personaggio eroe5 = {"Paladino", false, 160, arma_eroe5.dmg, armatura_eroe5.prot, 20};
     #pragma endregion
         
-    personaggio giocatore; 
+    personaggio giocatore;  
     int Selezione_eroe;
     bool selezionato = false; 
     
@@ -160,14 +171,15 @@ int main(){
             giocatore.parato = false; 
         }
 
-        printf("Info: \n Vita Eroe: %d \n Vita %s: %d", giocatore.vita,nemico.nome,nemico.vita); 
+        printf("Info: \n Vita Eroe: %d \n Vita %s: %d \n", giocatore.vita,nemico.nome,nemico.vita); 
         printf("E' il tuo turno, seleziona l'azione: \n 1) Attacco \n 2) Usa oggetto \n 3) Parata \n 4) Fuggi \n "); 
         scanf("%d", &scelta);
         
         switch(scelta) {
             case 1: 
                 nemico.vita = nemico.vita - attacco(giocatore.attacco, nemico.difesa);
-                printf("Il %s ha %d hp\n", nemico.nome, nemico.vita);
+                if(nemico.vita<0){nemico.vita = 0;}
+                printf(" %s ha %d hp\n", nemico.nome, nemico.vita);
                 break;
             case 2: /* Usa Oggetto */ break;
             case 3:
@@ -178,7 +190,7 @@ int main(){
                 fuggito = fuga(giocatore.velocita,nemico.velocita,ind_vel);
                 pausa(1000);
                 if(fuggito == false){
-                    printf("Tentativo di fuga fallito...\n")
+                    printf("Tentativo di fuga fallito...\n");
                     if(ind_vel >= 5){
                         break;
                     }
@@ -188,7 +200,7 @@ int main(){
         }
 
         // Controllo fuori dallo switch: interrompe il ciclo while correttamente
-        if(nemico.vita <= 0) { 
+        if(nemico.vita <= 0 || fuggito == true) { 
             break; 
         }
 
@@ -215,10 +227,10 @@ int main(){
     }
     #pragma endregion
 
-    printf("\n Il combattimento è terminato\n"); 
+    printf("\nIl combattimento è terminato\n"); 
 
     if(fuggito == true){
-        printf("Sei fuggito"); 
+        printf("Sei fuggito \n"); 
     }else{
         printf("%s\n", (giocatore.vita <= 0) ? "Game Over" : "Hai Vinto!!!");
     }

@@ -7,7 +7,13 @@ struct Oggetto_arma{
     int dmg;
 }; 
 
+struct Oggetto_armatura{
+    char *nome;
+    int prot;
+};
+
 typedef struct Oggetto_arma Oggetto_arma;
+typedef struct Oggetto_armatura Oggetto_armatura; 
 
 struct inventario{ 
     Oggetto_arma *oggetto;
