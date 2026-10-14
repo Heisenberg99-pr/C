@@ -71,19 +71,19 @@ int main(){
     srand(time(NULL)); 
 
     #pragma region def_armi
-    Oggetto_arma arma_eroe1 = {"Spadone a Due Mani", 75};
-    Oggetto_arma arma_eroe2 = {"Bastone di Legno", 25};
-    Oggetto_arma arma_eroe3 = {"Pugnali Gemelli", 55};
-    Oggetto_arma arma_eroe4 = {"Mazza Chiodata", 45};
-    Oggetto_arma arma_eroe5 = {"Martello da Guerra", 70};
+    Arma arma1 = {"Spadone a Due Mani", 75};
+    Arma arma2 = {"Bastone di Legno", 25};
+    Arma arma3 = {"Pugnali Gemelli", 55};
+    Arma arma4 = {"Mazza Chiodata", 45};
+    Arma arma5 = {"Martello da Guerra", 70};
     #pragma endregion
 
     #pragma region def_armature
-    Oggetto_armatura armatura_eroe1 = {"Armatura di Piastre", 25}; 
-    Oggetto_armatura armatura_eroe2 = {"Tunica Mistica", 5};        
-    Oggetto_armatura armatura_eroe3 = {"Giubba di Cuoio", 12};      
-    Oggetto_armatura armatura_eroe4 = {"Cotta di Maglia", 18};     
-    Oggetto_armatura armatura_eroe5 = {"Armatura Sacra", 30};     
+    Armatura armatura1 = {"Armatura di Piastre", 25}; 
+    Armatura armatura2 = {"Tunica Mistica", 5};        
+    Armatura armatura3 = {"Giubba di Cuoio", 12};      
+    Armatura armatura4 = {"Cotta di Maglia", 18};     
+    Armatura armatura5 = {"Armatura Sacra", 30};     
     #pragma endregion
 
     #pragma region def_mostri
@@ -96,11 +96,11 @@ int main(){
 
 
     #pragma region def_eroi
-    personaggio eroe1 = {"Guerriero", false, 180, arma_eroe1.dmg, armatura_eroe1.prot, 25};
-    personaggio eroe2 = {"Mago", false, 90, arma_eroe2.dmg, armatura_eroe2.prot, 35};
-    personaggio eroe3 = {"Ladro", false, 110, arma_eroe3.dmg, armatura_eroe3.prot, 75};
-    personaggio eroe4 = {"Chierico", false, 140, arma_eroe4.dmg, armatura_eroe4.prot, 30};
-    personaggio eroe5 = {"Paladino", false, 160, arma_eroe5.dmg, armatura_eroe5.prot, 20};
+    personaggio eroe1 = {"Guerriero", false, 180, arma1.dmg, armatura1.prot, 25};
+    personaggio eroe2 = {"Mago", false, 90, arma2.dmg, armatura2.prot, 35};
+    personaggio eroe3 = {"Ladro", false, 110, arma3.dmg, armatura3.prot, 75};
+    personaggio eroe4 = {"Chierico", false, 140, arma4.dmg, armatura4.prot, 30};
+    personaggio eroe5 = {"Paladino", false, 160, arma5.dmg, armatura5.prot, 20};
     #pragma endregion
         
     personaggio giocatore;  
@@ -178,7 +178,9 @@ int main(){
         switch(scelta) {
             case 1: 
                 nemico.vita = nemico.vita - attacco(giocatore.attacco, nemico.difesa);
-                if(nemico.vita<0){nemico.vita = 0;}
+                if(nemico.vita<0){
+                    nemico.vita = 0;
+                }
                 printf(" %s ha %d hp\n", nemico.nome, nemico.vita);
                 break;
             case 2: /* Usa Oggetto */ break;
@@ -213,6 +215,9 @@ int main(){
                 printf("Il nemico sta attaccando...\n");
                 pausa(2000);
                 giocatore.vita = giocatore.vita - attacco(nemico.attacco, giocatore.difesa); 
+                if(giocatore.vita<0){
+                    giocatore.vita = 0;
+                }
                 printf("Ti rimangono %d hp\n", giocatore.vita);
                 break; 
             case 2: /* ... */ break;
